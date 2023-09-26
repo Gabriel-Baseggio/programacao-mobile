@@ -1,74 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Home from './src/Home';
+import Jogo from './src/Jogo';
 
 export default function App() {
-  const [player1, setPlayer1] = useState('');
-  const [player2, setPlayer2] = useState('');
+    const [screen, setScreen] = useState('home');
+    const [player1, setPlayer1] = useState('');
+    const [player2, setPlayer2] = useState('');
 
-  const handleClick = (event) => {
-    alert(player1 + "\n" + player2);
-  }
+    const checkScreen = (checkScreen) => checkScreen === screen;
 
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
+    const setJogadores = (nome1, nome2) => {
+        setPlayer1(nome1);
+        setPlayer2(nome2);
+    }
 
-      <Text>Nome Player1: {player1}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder='Player 1'
-        onChangeText={setPlayer1}
-      />
+    const changeScreen = (newScreen) => setScreen(newScreen);
 
-      <Text>Nome Player2: {player2}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder='Player 2'
-        onChangeText={setPlayer2}
-      />
-
-      <Button title='Meu botão' onPress={handleClick} />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <StatusBar style="auto" />
+            {checkScreen("home") &&
+                <Home
+                    mudarNomeJogadores={setJogadores}
+                    changeScreen={changeScreen}
+                />
+            }
+            {checkScreen("jogo") &&
+                <Jogo
+                    changeScreen={changeScreen}
+                    player1={player1}
+                    player2={player2}
+                />
+            }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
-    width: '80%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
-    padding: 5,
-    color: 'black',
-  },
+    container: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
-
-// function myState(_state) {
-//   let state = _state;
-
-//   function setState(value) {
-//     state = value;
-//   }
-
-//   function getState() {
-//     return state;
-//   }
-
-//   return [state, setState, getState];
-// }
-
-// const [nome, setNome, getNome] = myState("Gabriel");
-
-// console.log(nome) // Gabriel
-
-// setNome("Baseggio");
-// console.log(getNome()); //Baseggio
