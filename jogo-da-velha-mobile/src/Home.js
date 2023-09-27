@@ -6,7 +6,6 @@ export default function Home(props) {
     const [player2, setPlayer2] = useState('');
 
     const handleClick = (event) => {
-        alert(`${player1} x ${player2}`);
         props.mudarNomeJogadores(player1, player2);
         props.changeScreen("jogo");
     }
@@ -27,7 +26,7 @@ export default function Home(props) {
             />
             <Text>O nome do jogador 2 é: {player2}</Text>
 
-            
+
             
             <Button title='Click' onPress={handleClick} />
         </View>
