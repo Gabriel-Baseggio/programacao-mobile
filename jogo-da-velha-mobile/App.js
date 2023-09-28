@@ -2,38 +2,77 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Home from './src/Home';
-import Jogo from './src/Jogo';
+import HomeJogadores from './src/HomeJogadores';
+import Velha from './src/Velha';
+import HomeForca from './src/HomeForca';
+import Forca from './src/Forca';
+import Memoria from './src/Memoria';
 
 export default function App() {
-    const [screen, setScreen] = useState('home');
-    const [player1, setPlayer1] = useState('');
-    const [player2, setPlayer2] = useState('');
+    const [screen, setScreen] = useState("home");
+    const [nextScreen, setNextScreen] = useState("");
+    const [jogador1, setJogador1] = useState("");
+    const [jogador2, setJogador2] = useState("");
+    const [palavraForca, setPalavraForca] = useState("");
 
-    const checkScreen = (checkScreen) => checkScreen === screen;
+    const checkScreen = (screenName) => screenName === screen;
 
     const setJogadores = (nome1, nome2) => {
-        setPlayer1(nome1);
-        setPlayer2(nome2);
+        setJogador1(nome1);
+        setJogador2(nome2);
     }
 
-    const changeScreen = (newScreen) => setScreen(newScreen);
+    const changeScreen = (newScreen) => setScreen(newScreen); 
 
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {checkScreen("home") &&
+
+            {checkScreen("home") && (
                 <Home
+                    changeScreen={changeScreen}
+                    nextScreen={setNextScreen}
+                />
+            )}
+
+            {checkScreen("homeJogadores") && (
+                <HomeJogadores
+                    changeScreen={changeScreen}
                     mudarNomeJogadores={setJogadores}
+                    jogo={nextScreen}
+                />
+            )}
+
+            {checkScreen("velha") && (
+                <Velha
+                    changeScreen={changeScreen}
+                    player1={jogador1}
+                    player2={jogador2}
+                />
+            )}
+
+            {checkScreen("homeForca") && (
+                <HomeForca
+                    changeScreen={changeScreen}
+                    palavraForca={palavraForca}
+                    setPalavraForca={setPalavraForca}
+                />
+            )}
+
+            {checkScreen("forca") && (
+                <Forca
+                    changeScreen={changeScreen}
+                    palavraForca={palavraForca}
+                    setPalavraForca={setPalavraForca}
+                />
+            )}
+
+            {checkScreen("memoria") && (
+                <Memoria
                     changeScreen={changeScreen}
                 />
-            }
-            {checkScreen("jogo") &&
-                <Jogo
-                    changeScreen={changeScreen}
-                    player1={player1}
-                    player2={player2}
-                />
-            }
+            )}
+
         </View>
     );
 }
@@ -41,9 +80,9 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        width: "100%",
     },
 });
