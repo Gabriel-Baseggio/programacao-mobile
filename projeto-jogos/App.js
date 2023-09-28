@@ -9,7 +9,7 @@ import Forca from './src/Forca';
 import Memoria from './src/Memoria';
 
 export default function App() {
-    const [screen, setScreen] = useState("home");
+    const [screen, setScreen] = useState("memoria");
     const [nextScreen, setNextScreen] = useState("");
     const [jogador1, setJogador1] = useState("");
     const [jogador2, setJogador2] = useState("");

@@ -33,8 +33,12 @@ export default function Forca({ changeScreen, palavraForca, setPalavraForca }) {
             // Lógica para tirar a vida do boneco com a IMG
         } else {
             const letrasUsadasTmp = [...letrasUsadas];
-            letrasUsadasTmp.push(`${palavraAdivinha.toUpperCase().charAt(0)} `)
-            setLetrasUsadas(letrasUsadasTmp);
+            if (letrasUsadasTmp.includes(`${palavraAdivinha.toUpperCase().charAt(0)} `)) {
+                console.log(letrasUsadasTmp.includes(palavraAdivinha.toUpperCase().charAt(0)))
+            } else {
+                letrasUsadasTmp.push(`${palavraAdivinha.toUpperCase().charAt(0)} `);
+                setLetrasUsadas(letrasUsadasTmp);
+            }
 
             let palavraTmp = palavraForca.toUpperCase().split("").map((letra, index) => {
                 return letra === palavraAdivinha.toUpperCase().charAt(0);
