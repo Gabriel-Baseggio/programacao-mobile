@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Text, Pressable, Button } from "react-native";
 
 const emojis = ["😀", "😁", "😂", "🤣", "😃", "😄", "😅", "😆", "😉", "😊", "😋", "😎", "😍",
     "😘", "🥰", "😗", "😙", "😚", "🙂", "🤗", "🤩", "🤔", "🤨", "😐", "😑", "😀", "😁", "😂",
@@ -18,6 +18,7 @@ const game = [
     ["", "", "", "", ""],
     ["", "", "", "", ""]
 ];
+
 game.forEach((row) => {
     for (let i = 0; i < 5; i++) {
         let index = Math.floor(Math.random() * emojis.length);
@@ -26,16 +27,11 @@ game.forEach((row) => {
     }
 });
 
-console.log(game)
-
-export default function Memoria({ }) {
-    const [clicks, setClicks] = useState([0, "", ""]);
-    const [indexes1, setIndexes1] = useState([]);
-
-    useEffect(() => {
-        console.log(clicks);
-        console.log(showedGame);
-    }, clicks);
+export default function Memoria({ changeScreen, jogador1, jogador2 }) {
+    const [clicks, setClicks] = useState(0);
+    const [indexes, setIndexes] = useState([]);
+    const [jogador, setJogador] = useState(jogador1);
+    const [pares, setPares] = useState([0, 0]);
 
     const [showedGame, setShowedGame] = useState([
         ["", "", "", "", ""],
@@ -50,47 +46,83 @@ export default function Memoria({ }) {
         ["", "", "", "", ""]
     ]);
 
+    useEffect(() => {
+        checkWin()
+    }, showedGame);
+
     const play = (row, col) => {
         let showedGameTmp = [[...showedGame[0]], [...showedGame[1]], [...showedGame[2]], [...showedGame[3]],
         [...showedGame[4]], [...showedGame[5]], [...showedGame[6]], [...showedGame[7]], [...showedGame[8]],
         [...showedGame[9]]];
-        let arrTmp1 = [...clicks];
-        // Falta a lógica para sumir os não iguais
-        if (arrTmp1[0] <= 1) {
 
-            if (arrTmp1[0] === 1) {
-                arrTmp1[1] = game[row][col];
-                let arrIndexes = [row, col];
-                setIndexes1([...arrIndexes])
-                showedGameTmp[row][col] = game[row][col];
-            } else if (arrTmp1[0] === 2 && arrTmp1[1] === game[row][col]) {
-                arrTmp1[2] = game[row][col];
-                showedGameTmp[row][col] = game[row][col];
-            } else if (arrTmp1 === 2 && arrTmp1[1] != game[row][col]) {
-                showedGameTmp[row][col] = "";
-                let indexes = indexes1;
-                showedGameTmp[indexes[0]][indexes[1]] = "";
-            }
+        let amountClicks = clicks;
+        let clickIndexes = [...indexes];
+        let paresTmp = [...pares];
+        
+        if (amountClicks === 0) {
             
-            setShowedGame(showedGameTmp)
-            ++arrTmp1[0];
-            setClicks([...arrTmp1]);
-        } else {
-            console.log("Apagou?    ");
-            setShowedGame(showedGameTmp);
-            let arr = [0, "", ""];
-            setClicks([...arr]);
-        }
-    }
+            setIndexes([row, col]);
+            
+            showedGameTmp[row][col] = game[row][col];
+            
+        } else if (amountClicks === 1) {
+            
+            setIndexes([...indexes, row, col]);
+            
+            showedGameTmp[row][col] = game[row][col];
+            
+        } else if (amountClicks == 2 && game[clickIndexes[0]][clickIndexes[1]] != game[clickIndexes[2]][clickIndexes[3]]) {
+            
 
+            showedGameTmp[clickIndexes[0]][clickIndexes[1]] = "";
+            showedGameTmp[clickIndexes[2]][clickIndexes[3]] = "";
+            
+            setIndexes([]);
+            amountClicks = -1;
+            setJogador(jogador === jogador1 ? jogador2 : jogador1);
+        } else {
+            jogador === jogador1 ? ++paresTmp[0] : ++paresTmp[1];
+            setIndexes([]);
+            amountClicks = -1;
+        }
+        
+        setPares([...paresTmp]);
+        setShowedGame([...showedGameTmp])
+        ++amountClicks;
+        setClicks(amountClicks);
+
+    }
 
     const handleClickPosition = (row, col) => {
         play(row, col);
     }
 
+    const checkWin = () => {
+        let temGanhador = true;
+        showedGame.forEach((row) => {
+            row.forEach((card) => {
+                if (card == "") {
+                    temGanhador = false;
+                }
+            });
+        });
+        temGanhador ? definirGanhador() : 0;
+    }
+
+    const definirGanhador = () => {
+        if (pares[0] > pares[1]) {
+            alert("O jogador " + jogador1 + " ganhou!")
+        } else {
+            alert("O jogador " + jogador2 + " ganhou!")
+        }
+        changeScreen("home");
+    }
+
     return (
         <View style={styles.container}>
+            <Button title="Voltar" onPress={ () => changeScreen("home")} />
             <Text>Jogo da Memória</Text>
+            <Text>Vez do jogador: {jogador}</Text>
             <View>
                 {
                     showedGame.map((row, indexRow) => {
@@ -100,8 +132,11 @@ export default function Memoria({ }) {
                                     <Pressable
                                         key={`${indexRow}, ${indexColumn}, ${column}`}
                                         onPress={() => handleClickPosition(indexRow, indexColumn)}
+                                        disabled={(column != "")}
                                     >
-                                        <View style={styles.cardGame}>
+                                        <View 
+                                            style={(column != "" ? styles.cardGameDisabled : styles.cardGame)}
+                                        >
                                             <Text style={styles.cardGameFont}>
                                                 {column}
                                             </Text>
@@ -129,7 +164,16 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     cardGame: {
-        backgroundColor: 'red',
+        width: 40,
+        height: 40,
+        margin: 2,
+        borderRadius: 5,
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: "grey",
+        alignItems: "center",
+    },
+    cardGameDisabled: {
         width: 40,
         height: 40,
         margin: 2,

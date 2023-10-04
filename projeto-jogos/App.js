@@ -9,7 +9,7 @@ import Forca from './src/Forca';
 import Memoria from './src/Memoria';
 
 export default function App() {
-    const [screen, setScreen] = useState("memoria");
+    const [screen, setScreen] = useState("home");
     const [nextScreen, setNextScreen] = useState("");
     const [jogador1, setJogador1] = useState("");
     const [jogador2, setJogador2] = useState("");
@@ -70,6 +70,8 @@ export default function App() {
             {checkScreen("memoria") && (
                 <Memoria
                     changeScreen={changeScreen}
+                    jogador1={jogador1}
+                    jogador2={jogador2}
                 />
             )}
 
