@@ -52,9 +52,11 @@ export default function Velha({ changeScreen, player1, player2 }) {
     };
 
     const endPlay = (message) => {
-        alert(message);
-        setStates(startValues);
-        goBack();
+        setTimeout(() => {
+            alert(message);
+            setStates(startValues);
+            goBack();
+        }, 5);
     }
 
     const checkWin = () => {
@@ -95,7 +97,7 @@ export default function Velha({ changeScreen, player1, player2 }) {
 
     return (
         <View style={styles.container}>
-            <Text>
+            <Text style={player == "X" ? styles.jogador1 : styles.jogador2}>
                 É a vez do jogador: {getPlayerName()} - {player}
             </Text>
 
@@ -109,7 +111,7 @@ export default function Velha({ changeScreen, player1, player2 }) {
                                     key={`${indexRow}, ${indexColumn}, ${column}`}
                                     onPress={() => handleClickPosition(indexRow, indexColumn)}
                                     >
-                                        <View style={styles.buttonGame}>
+                                        <View style={column != "" ? (column == "X" ? styles.buttonGameRed : styles.buttonGameBlue) : styles.buttonGame}>
                                             <Text style={styles.buttonGameFont}>
                                                 {column}
                                             </Text>
@@ -138,17 +140,40 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     buttonGame: {
-        backgroundColor: 'red',
         width: 80,
         height: 80,
         margin: 2,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "lightgrey",
+        backgroundColor: 'lightgrey',
+        alignItems: "center",
+    },
+    buttonGameRed: {
+        width: 80,
+        height: 80,
+        margin: 2,
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: 'red',
+        alignItems: "center",
+    },
+    buttonGameBlue: {
+        width: 80,
+        height: 80,
+        margin: 2,
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: 'blue',
         alignItems: "center",
     },
     buttonGameFont: {
         fontSize: 50,
         color: "#fff"
+    }, 
+    jogador1: {
+        color: "red",
+    }, 
+    jogador2: {
+        color: "blue",
     }
 });

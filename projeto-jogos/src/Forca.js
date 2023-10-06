@@ -3,10 +3,10 @@ import { View, StyleSheet, Text, TextInput, Button, Image } from "react-native";
 
 const imgsForca = [require("./assets/imgForca0.png"), require("./assets/imgForca1.png"), require("./assets/imgForca2.png"), require("./assets/imgForca3.png"), require("./assets/imgForca4.png"), require("./assets/imgForca5.png")];
 
-export default function Forca({ changeScreen, palavraForca, setPalavraForca }) {
+export default function Forca({ changeScreen, palavraForca, setPalavraForca, dicaForca, setDicaForca }) {
 
     const valorInicial = palavraForca.split("").map((letra) => {
-        return letra === " " ? " " : "_ ";
+        return letra === " " ? " " : " _ ";
     });
     const [palavraMostra, setPalavraMostra] = useState(valorInicial);
     const [palavraAdivinha, setPalavraAdivinha] = useState("");
@@ -22,20 +22,24 @@ export default function Forca({ changeScreen, palavraForca, setPalavraForca }) {
 
     useEffect(() => {
         if (palavraMostra.join("").toUpperCase() === palavraForca.toUpperCase()) {
-            alert(`Parabéns, você acertou!\nA palavra era: ${palavraForca}`);
-            goBack();
+            setTimeout(() => {
+                alert(`Parabéns, você acertou!\nA palavra era: ${palavraMostra.join("")}`);
+                goBack();
+            }, 10);
         }
         let vidasTmp = vidas;
         setImgForca(imgsForca[vidasTmp]);
         if (vidasTmp == 6) {
-            alert("Morreu bobão!")
-            changeScreen("home")
+            setTimeout(() => {
+                alert("Morreu bobão!")
+                changeScreen("home")
+            }, 10);
         }
     }, [palavraMostra, vidas]);
 
     const checarLetra = () => {
         let vidastmp = vidas;
-        if (palavraAdivinha.length >= 1 && palavraAdivinha.match('[A-Za-z]+')) {
+        if (palavraAdivinha.length >= 1 && palavraAdivinha.match('[A-z]+')) {
             if (palavraAdivinha.toUpperCase() === palavraForca.toUpperCase()) {
                 alert(`Parabéns, você acertou!\nA palavra era: ${palavraForca}`);
                 goBack();
@@ -91,9 +95,10 @@ export default function Forca({ changeScreen, palavraForca, setPalavraForca }) {
 
             <Text>{letrasUsadas}</Text>
 
+            {(dicaForca != "") && <Text>Dica: {dicaForca}</Text>}
+
             <TextInput placeholder='Letra ou palavra para adivinhar' value={palavraAdivinha} onChangeText={setPalavraAdivinha} style={styles.input} id="abcde" />
             <Button title="Adivinhar" onPress={checarLetra} />
-
 
             <Button title="Voltar" onPress={goBack} />
         </View>

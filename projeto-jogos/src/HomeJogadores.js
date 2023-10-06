@@ -7,8 +7,12 @@ export default function HomeJogadores({ changeScreen, mudarNomeJogadores, jogo }
 
   const handleClick = () => {
     if (mudarNomeJogadores) {
-      mudarNomeJogadores(jogador1, jogador2)
-      changeScreen(jogo)
+      if (jogador1 == "" || jogador2 == "") {
+        alert("Ambos jogadores devem ter um nome!")
+      } else {
+        mudarNomeJogadores(jogador1, jogador2)
+        changeScreen(jogo)
+      }
     }
   }
 

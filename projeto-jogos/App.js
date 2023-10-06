@@ -14,6 +14,7 @@ export default function App() {
     const [jogador1, setJogador1] = useState("");
     const [jogador2, setJogador2] = useState("");
     const [palavraForca, setPalavraForca] = useState("");
+    const [dicaForca, setDicaForca] = useState("");
 
     const checkScreen = (screenName) => screenName === screen;
 
@@ -56,6 +57,8 @@ export default function App() {
                     changeScreen={changeScreen}
                     palavraForca={palavraForca}
                     setPalavraForca={setPalavraForca}
+                    dicaForca={dicaForca}
+                    setDicaForca={setDicaForca}
                 />
             )}
 
@@ -64,6 +67,8 @@ export default function App() {
                     changeScreen={changeScreen}
                     palavraForca={palavraForca}
                     setPalavraForca={setPalavraForca}
+                    dicaForca={dicaForca}
+                    setDicaForca={setDicaForca}
                 />
             )}
 

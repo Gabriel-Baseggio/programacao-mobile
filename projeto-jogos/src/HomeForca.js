@@ -1,11 +1,11 @@
 import { View, StyleSheet, Text, TextInput, Button } from "react-native";
 
-export default function HomeForca({ changeScreen, palavraForca, setPalavraForca }) {
+export default function HomeForca({ changeScreen, palavraForca, setPalavraForca, dicaForca, setDicaForca }) {
 
     const handleClick = () => {
         if (changeScreen && setPalavraForca) {
             let palavraForcaTmp = palavraForca;
-            if (palavraForcaTmp.match('[A-Za-z\s]+')) {
+            if (palavraForcaTmp.match('[A-z\s]+')) {
                 changeScreen("forca")
             } else {
                 alert("Deve conter pelo menos uma letra e apenas letras e espaços!")
@@ -17,6 +17,9 @@ export default function HomeForca({ changeScreen, palavraForca, setPalavraForca 
         <View style={styles.container}>
             <TextInput placeholder='Palavra para a forca' onChangeText={setPalavraForca} style={styles.input} />
             <Text>A palavra para a forca será: {palavraForca}</Text>
+            
+            <TextInput placeholder='Dica para a forca' onChangeText={setDicaForca} style={styles.input} />
+            <Text>A dica será: {dicaForca}</Text>
 
             <Button title='Iniciar' onPress={handleClick} />
         </View>
