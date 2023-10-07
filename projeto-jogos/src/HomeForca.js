@@ -5,23 +5,23 @@ export default function HomeForca({ changeScreen, palavraForca, setPalavraForca,
     const handleClick = () => {
         if (changeScreen && setPalavraForca) {
             let palavraForcaTmp = palavraForca;
-            if (palavraForcaTmp.match('[A-z\s]+')) {
+            if (palavraForcaTmp.match('[A-zç\s-]+')) {
                 changeScreen("forca")
             } else {
-                alert("Deve conter pelo menos uma letra e apenas letras e espaços!")
+                alert("Deve conter pelo menos uma letra, apenas letras sem acento ou espaços!")
             }
         }
       }
 
     return (
         <View style={styles.container}>
-            <TextInput placeholder='Palavra para a forca' onChangeText={setPalavraForca} style={styles.input} />
             <Text>A palavra para a forca será: {palavraForca}</Text>
+            <TextInput placeholder='Palavra para a forca' onChangeText={setPalavraForca} style={styles.input} />
             
-            <TextInput placeholder='Dica para a forca' onChangeText={setDicaForca} style={styles.input} />
             <Text>A dica será: {dicaForca}</Text>
+            <TextInput placeholder='Dica para a forca' onChangeText={setDicaForca} style={styles.input} />
 
-            <Button title='Iniciar' onPress={handleClick} />
+            <Button title='Iniciar' color="#082D0F" onPress={handleClick} />
         </View>
     )
 }
@@ -29,19 +29,20 @@ export default function HomeForca({ changeScreen, palavraForca, setPalavraForca,
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 20,
-        alignItems: "center",
-        justifyContent: "center",
+        gap: 10,
+        backgroundColor: '#DEE5E5',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: "100%",
     },
     input: {
         width: '80%',
         height: 40,
-        backgroundColor: 'white',
+        backgroundColor: '#5E807F',
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 5,
         padding: 5,
-        color: 'black',
+        color: 'white',
     },
 });

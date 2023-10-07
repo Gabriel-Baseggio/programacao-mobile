@@ -125,7 +125,7 @@ export default function Memoria({ changeScreen, jogador1, jogador2 }) {
 
     return (
         <View style={styles.container}>
-            <Button title="Voltar" onPress={() => changeScreen("home")} />
+            <Button title="Voltar" color="#082D0F" onPress={() => changeScreen("home")} />
             <Text>Jogo da Memória</Text>
             <Text style={jogador == jogador1 ? styles.jogador1 : styles.jogador2}>Vez do jogador: {jogador}</Text>
             <Text style={styles.jogador1}>{jogador1}: {pares[0]}</Text>
@@ -163,9 +163,10 @@ export default function Memoria({ changeScreen, jogador1, jogador2 }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 5,
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: '#DEE5E5',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: "100%",
     },
     row: {
         display: "flex",
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "grey",
+        backgroundColor: "#9DC5BB",
         alignItems: "center",
     },
     cardGameJog1: {
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "red",
+        backgroundColor: "#B83D16",
         alignItems: "center",
     },
     cardGameJog2: {
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "blue",
+        backgroundColor: "#066B52",
         alignItems: "center",
     },
     cardGameDisabled: {
@@ -216,9 +217,9 @@ const styles = StyleSheet.create({
         color: "#fff",
     },
     jogador1: {
-        color: "red",
+        color: "#B83D16",
     },
     jogador2: {
-        color: "blue",
+        color: "#066B52",
     }
 });

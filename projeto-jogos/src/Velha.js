@@ -73,7 +73,7 @@ export default function Velha({ changeScreen, player1, player2 }) {
             });
 
             if (countStates === 9) {
-                endPlay("Ninguém venceu!");
+                endPlay("Deu velha!");
             }
         }
     }
@@ -108,8 +108,8 @@ export default function Velha({ changeScreen, player1, player2 }) {
                             <View style={styles.row} key={indexRow}>
                                 {row.map((column, indexColumn) => (
                                     <TouchableOpacity
-                                    key={`${indexRow}, ${indexColumn}, ${column}`}
-                                    onPress={() => handleClickPosition(indexRow, indexColumn)}
+                                        key={`${indexRow}, ${indexColumn}, ${column}`}
+                                        onPress={() => handleClickPosition(indexRow, indexColumn)}
                                     >
                                         <View style={column != "" ? (column == "X" ? styles.buttonGameRed : styles.buttonGameBlue) : styles.buttonGame}>
                                             <Text style={styles.buttonGameFont}>
@@ -123,7 +123,7 @@ export default function Velha({ changeScreen, player1, player2 }) {
                     })
                 }
             </View>
-            <Button title="Voltar" onPress={goBack} />
+            <Button title="Voltar" color="#082D0F" onPress={goBack} />
         </View>
     )
 }
@@ -131,9 +131,11 @@ export default function Velha({ changeScreen, player1, player2 }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 20,
-        alignItems: "center",
-        justifyContent: "center",
+        gap: 10,
+        backgroundColor: '#DEE5E5',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: "100%",
     },
     row: {
         display: "flex",
@@ -145,7 +147,8 @@ const styles = StyleSheet.create({
         margin: 2,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: 'lightgrey',
+        backgroundColor: '#9DC5BB',
+        borderRadius: 5,
         alignItems: "center",
     },
     buttonGameRed: {
@@ -154,7 +157,8 @@ const styles = StyleSheet.create({
         margin: 2,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: 'red',
+        backgroundColor: '#B83D16',
+        borderRadius: 5,
         alignItems: "center",
     },
     buttonGameBlue: {
@@ -163,17 +167,18 @@ const styles = StyleSheet.create({
         margin: 2,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: 'blue',
+        backgroundColor: '#066B52',
+        borderRadius: 5,
         alignItems: "center",
     },
     buttonGameFont: {
         fontSize: 50,
         color: "#fff"
-    }, 
+    },
     jogador1: {
-        color: "red",
-    }, 
+        color: "#B83D16",
+    },
     jogador2: {
-        color: "blue",
+        color: "#066B52",
     }
 });

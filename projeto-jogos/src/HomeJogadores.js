@@ -18,34 +18,34 @@ export default function HomeJogadores({ changeScreen, mudarNomeJogadores, jogo }
 
   return (
     <View style={styles.container}>
-      <TextInput placeholder='Jogador 1' value={jogador1} onChangeText={setJogador1} style={styles.input} />
       <Text>O nome do jogador 1 é: {jogador1}</Text>
+      <TextInput placeholder='Jogador 1' value={jogador1} onChangeText={setJogador1} style={styles.input} />
 
-      <TextInput placeholder='Jogador 2' value={jogador2} onChangeText={setJogador2} style={styles.input} />
       <Text>O nome do jogador 2 é: {jogador2}</Text>
+      <TextInput placeholder='Jogador 2' value={jogador2} onChangeText={setJogador2} style={styles.input} />
 
-      <Button title='Iniciar' onPress={handleClick} />
+      <Button title='Iniciar' color="#082D0F" onPress={handleClick} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        gap: 20,
-        width: '100%',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    input: {
-        width: '80%',
-        height: 40,
-        backgroundColor: 'white',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 5,
-        padding: 5,
-        color: 'black',
-    },
+  container: {
+    flex: 1,
+    gap: 10,
+    backgroundColor: '#DEE5E5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: "100%",
+  },
+  input: {
+    width: '80%',
+    height: 40,
+    backgroundColor: '#5E807F',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 5,
+    color: "#DEE5E5",
+  },
 });
