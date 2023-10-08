@@ -16,10 +16,10 @@ export default function HomeForca({ changeScreen, palavraForca, setPalavraForca,
     return (
         <View style={styles.container}>
             <Text>A palavra para a forca será: {palavraForca}</Text>
-            <TextInput placeholder='Palavra para a forca' onChangeText={setPalavraForca} style={styles.input} />
+            <TextInput placeholder='Palavra para a forca' value={palavraForca} onChangeText={setPalavraForca} style={styles.input} />
             
             <Text>A dica será: {dicaForca}</Text>
-            <TextInput placeholder='Dica para a forca' onChangeText={setDicaForca} style={styles.input} />
+            <TextInput placeholder='Dica para a forca' value={dicaForca} onChangeText={setDicaForca} style={styles.input} />
 
             <Button title='Iniciar' color="#082D0F" onPress={handleClick} />
         </View>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#DEE5E5',
         alignItems: 'center',
         justifyContent: 'center',
+        textAlign: "center",
         width: "100%",
     },
     input: {

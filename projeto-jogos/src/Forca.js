@@ -15,6 +15,7 @@ export default function Forca({ changeScreen, palavraForca, setPalavraForca, dic
 
     const goBack = () => {
         setPalavraForca("");
+        setDicaForca("");
         changeScreen("home");
     }
 
@@ -74,6 +75,8 @@ export default function Forca({ changeScreen, palavraForca, setPalavraForca, dic
                     }
 
                     setPalavraMostra(palavraMostraTmp);
+                } else {
+                    alert("Letra já usada, tente outra letra")
                 }
 
             }

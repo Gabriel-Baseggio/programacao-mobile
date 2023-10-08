@@ -87,7 +87,7 @@ export default function Memoria({ changeScreen, jogador1, jogador2 }) {
                 showedGameTmp[clickIndexes[0]][clickIndexes[1]].val = "";
                 showedGameTmp[row][col].val = "";
                 setShowedGame([...showedGameTmp])
-            }, 500);
+            }, 1000);
             
             showedGameTmp[row][col].val = gameTmp[row][col];
             setIndexes([]);
@@ -116,9 +116,9 @@ export default function Memoria({ changeScreen, jogador1, jogador2 }) {
 
     const definirGanhador = () => {
         if (pares[0] > pares[1]) {
-            alert("O jogador " + jogador1 + " ganhou!")
+            alert(jogador1 + " ganhou!")
         } else {
-            alert("O jogador " + jogador2 + " ganhou!")
+            alert(jogador2 + " ganhou!")
         }
         changeScreen("home");
     }
@@ -127,7 +127,7 @@ export default function Memoria({ changeScreen, jogador1, jogador2 }) {
         <View style={styles.container}>
             <Button title="Voltar" color="#082D0F" onPress={() => changeScreen("home")} />
             <Text>Jogo da Memória</Text>
-            <Text style={jogador == jogador1 ? styles.jogador1 : styles.jogador2}>Vez do jogador: {jogador}</Text>
+            <Text style={jogador == jogador1 ? styles.jogador1 : styles.jogador2}>Vez de: {jogador}</Text>
             <Text style={styles.jogador1}>{jogador1}: {pares[0]}</Text>
             <Text style={styles.jogador2}>{jogador2}: {pares[1]}</Text>
             <View>
