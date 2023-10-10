@@ -4,11 +4,10 @@ export default function HomeForca({ changeScreen, palavraForca, setPalavraForca,
 
     const handleClick = () => {
         if (changeScreen && setPalavraForca) {
-            let palavraForcaTmp = palavraForca;
-            if (palavraForcaTmp.match('[A-zç\s-]+')) {
+            if (palavraForca.match(/^([A-zç\s-]+)$/g)) {
                 changeScreen("forca")
             } else {
-                alert("Deve conter pelo menos uma letra, apenas letras sem acento ou espaços!")
+                alert("Deve conter pelo menos uma letra, apenas letras sem acento, espaços ou hífens!");
             }
         }
       }
