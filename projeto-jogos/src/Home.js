@@ -1,22 +1,25 @@
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
-export default function Home({ changeScreen, nextScreen }) {
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Pagina1 from './Pagina1'
+import Pagina2 from './Pagina2'
+
+const Stack = createNativeStackNavigator();
+
+export default function Home() {
     return (
-        <View style={styles.container}>
-            <Button title="Jogo da Velha" color="#082D0F" onPress={() => {nextScreen("velha"); changeScreen("homeJogadores")}} />
-            <Button title="Jogo da Forca" color="#082D0F" onPress={() => {changeScreen("homeForca")}} />
-            <Button title="Jogo da Memória" color="#082D0F" onPress={() => {nextScreen("memoria"); changeScreen("homeJogadores")}} />
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={({ navigation }) => <View>
+                        <Text>Home</Text>
+                        <Button title='1' onPress={() => navigation.navigate("Pagina1")} />
+                        <Button title='2' onPress={() => navigation.navigate("Pagina2")} />
+                    </View>} />
+                <Stack.Screen name="Pagina1" component={Pagina1} />
+                <Stack.Screen name="Pagina2" component={Pagina2} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        gap: 20,
-        backgroundColor: '#DEE5E5',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: "100%",
-    },
-});
