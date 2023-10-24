@@ -1,59 +1,22 @@
+import { StyleSheet, View, Button } from 'react-native';
 
-
-export default function Home() {
+export default function Home({ changeScreen, nextScreen }) {
     return (
         <View style={styles.container}>
-            <StatusBar style="auto" />
-
-            {checkScreen("home") && (
-                <Home
-                    changeScreen={changeScreen}
-                    nextScreen={setNextScreen}
-                />
-            )}
-
-            {checkScreen("homeJogadores") && (
-                <HomeJogadores
-                    changeScreen={changeScreen}
-                    mudarNomeJogadores={setJogadores}
-                    jogo={nextScreen}
-                />
-            )}
-
-            {checkScreen("velha") && (
-                <Velha
-                    changeScreen={changeScreen}
-                    player1={jogador1}
-                    player2={jogador2}
-                />
-            )}
-
-            {checkScreen("homeForca") && (
-                <HomeForca
-                    changeScreen={changeScreen}
-                    palavraForca={palavraForca}
-                    setPalavraForca={setPalavraForca}
-                    dicaForca={dicaForca}
-                    setDicaForca={setDicaForca}
-                />
-            )}
-
-            {checkScreen("forca") && (
-                <Forca
-                    changeScreen={changeScreen}
-                    palavraForca={palavraForca}
-                    setPalavraForca={setPalavraForca}
-                    dicaForca={dicaForca}
-                    setDicaForca={setDicaForca}
-                />
-            )}
-
-            {checkScreen("memoria") && (
-                <Memoria
-                    changeScreen={changeScreen}
-                    jogador1={jogador1}
-                    jogador2={jogador2}
-                />
-            )}
-      );
+            <Button title="Jogo da Velha" color="#082D0F" onPress={() => {nextScreen("velha"); changeScreen("homeJogadores")}} />
+            <Button title="Jogo da Forca" color="#082D0F" onPress={() => {changeScreen("homeForca")}} />
+            <Button title="Jogo da Memória" color="#082D0F" onPress={() => {nextScreen("memoria"); changeScreen("homeJogadores")}} />
+        </View>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        gap: 20,
+        backgroundColor: '#DEE5E5',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: "100%",
+    },
+});
