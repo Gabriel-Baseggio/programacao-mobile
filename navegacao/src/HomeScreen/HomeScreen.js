@@ -1,9 +1,13 @@
-import { View, Text } from "react-native/types";
+import { View, Text, Button } from "react-native/types";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     return (
         <View>
             <Text>Home Screen</Text>
+            <Button
+                title="Go to User Data"
+                onPress={() => navigation.navigate("UserData")}
+            />
         </View>
     );
 }
