@@ -1,0 +1,5 @@
+[ ] baixar uma biblioteca externa
+    npm i react-navigation/native
+    npm i react react-navigation/native-stack
+[ ] usar rotas para navegação
+[ ] salvar e buscar itens na memória do celular
