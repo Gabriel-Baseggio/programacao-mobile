@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import metadata from "../storage.metadata.json";
 import { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
-import { useIsFocused } from "react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 const HomeScreen = ({ navigation }) => {
     const [name, setName] = useState("");
