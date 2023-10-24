@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import Home from './src/Home';
 import HomeJogadores from './src/HomeJogadores';
 import Velha from './src/Velha';
